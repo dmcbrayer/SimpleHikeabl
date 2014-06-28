@@ -1,0 +1,12 @@
+<%= simple_form_for(@trip) do |f| %>
+  <%=f.input :name %>
+  <%=f.input :location %>
+  <%=f.input :starts_on %>
+  <%=f.input :ends_on %>
+  <%=f.input :description %>
+  <%=f.input :improvements %>
+  <%= f.button :submit %>
+<% end %>
+
+
+
