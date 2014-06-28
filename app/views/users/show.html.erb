@@ -2,3 +2,10 @@
 <p>Find me in app/views/users/show.html.erb</p>
 
 <%= @user.email %>
+
+<p><%= @user.email%>'s trips</p>
+<ul>
+	<% @usertrips.each do |trip| %>
+		<li><%= trip.location %></li>
+	<% end %>
+</ul>

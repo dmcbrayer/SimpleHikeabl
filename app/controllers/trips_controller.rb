@@ -10,14 +10,14 @@ class TripsController < ApplicationController
   end
 
   def new
-    @trip = Trip.new
+    @trip = current_user.trips.new
   end
 
   def edit
   end
 
   def create
-    @trip = Trip.new(trip_params)
+    @trip = current_user.trips.new(trip_params)
 
     respond_to do |format|
       if @trip.save
