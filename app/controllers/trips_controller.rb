@@ -3,7 +3,7 @@ class TripsController < ApplicationController
 
 
   def index
-    @trips = Trip.all
+    @trips = current_user.trips.all
   end
 
   def show
@@ -18,6 +18,7 @@ class TripsController < ApplicationController
 
   def create
     @trip = current_user.trips.new(trip_params)
+    @trip.created_by = current_user.id
 
     respond_to do |format|
       if @trip.save
@@ -58,6 +59,6 @@ class TripsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def trip_params
-      params.require(:trip).permit(:location, :description)
+      params.require(:trip).permit(:location, :description, :name, :starts_on, :ends_on, :improvements)
     end
 end
