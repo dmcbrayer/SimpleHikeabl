@@ -2,7 +2,7 @@
 <p>Find me in app/views/pages/home.html.erb</p>
 
 <% if user_signed_in? %>
-	<p>You are signed in.  Congratulations.  You are a genius.</p>
+	<p>You are signed in as <%= current_user.email %>.  Congratulations.  You are a genius.</p>
 <% else %>
 	<p><%= link_to "Sign up", new_user_registration_path %> for Hikeabl!</p>
 <% end %>

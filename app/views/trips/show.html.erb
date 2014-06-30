@@ -1,14 +1,36 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Location:</strong>
-  <%= @trip.location %>
-</p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @trip.description %>
-</p>
 
-<%= link_to 'Edit', edit_trip_path(@trip) %> |
-<%= link_to 'Back', trips_path %>
+
+<div class="panel panel-default drop-shadow">
+	<div class="panel-heading"><h3 class="panel-title">Showing your trip to <%= @trip.location %></h3>
+	<p><%= @trip.starts_on.strftime("%B #{@trip.starts_on.day.ordinalize}, %Y") %> - <%= @trip.ends_on.strftime("%B #{@trip.ends_on.day.ordinalize}, %Y") %></p>
+	</div>
+
+	<div class="panel-body">
+
+
+		<p>
+			<strong>Duration:</strong>
+			<%= distance_of_time_in_words(@trip.starts_on, @trip.ends_on) %>
+		</p>
+
+		<p>
+		  <strong>Description:</strong>
+		  <%= @trip.description %>
+		</p>
+
+		<% if @trip.improvements? %>
+			<p>
+				<strong>What do you wish you had done differently?</strong><br />
+				<%= @trip.improvements %>
+			</p>
+		<% end %>
+	</div>
+
+	<div class="panel-footer">
+
+		<%= link_to 'Edit', edit_trip_path(@trip) %> |
+		<%= link_to 'Back', trips_path %>
+	</div>
+</div>
