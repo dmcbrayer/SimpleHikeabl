@@ -3,7 +3,7 @@
 
 
 <div class="panel panel-default drop-shadow">
-	<div class="panel-heading"><h3 class="panel-title">Showing your trip to <%= @trip.location %></h3>
+	<div class="panel-heading"><h3 class="panel-title">Showing the trip to <%= @trip.location %></h3>
 	<p><%= @trip.starts_on.strftime("%B #{@trip.starts_on.day.ordinalize}, %Y") %> - <%= @trip.ends_on.strftime("%B #{@trip.ends_on.day.ordinalize}, %Y") %></p>
 	</div>
 

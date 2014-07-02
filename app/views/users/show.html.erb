@@ -1,11 +1,27 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
 
-<%= @user.email %>
+<div class="panel panel-default drop-shadow">
+  <div class="panel-heading">
+    <h1><%=@user.name %>'s Trips</h1>
+  </div>
+  <div class="panel-body">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Location</th>
+        </tr>
+      </thead>
 
-<p><%= @user.email%>'s trips</p>
-<ul>
-	<% @usertrips.each do |trip| %>
-		<li><%= link_to trip.location, trip %></li>
-	<% end %>
-</ul>
+      <tbody>
+        <% @usertrips.each do |trip| %>
+          <tr>
+            <td><%= link_to trip.name, trip %></td>
+            <td><%= trip.location %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+   </div>
+</div>
+
+
