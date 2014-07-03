@@ -21,8 +21,9 @@
       <% if user_signed_in? %>
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            <%= current_user.email %><span class="caret"></span></a>
+            <%= image_tag current_user.avatar.url(:header), class: "img-circle"%>  <%= current_user.email %><span class="caret"></span></a>
           <ul class="dropdown-menu">
+            <li><%= link_to "Your Profile", current_user %></li>
             <li><%= link_to "Users", users_path %></li>
             <li><%= link_to "Your Trips", trips_path %></li>
             <li><%= link_to "New Trip", new_trip_path %></li>

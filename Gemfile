@@ -18,6 +18,7 @@ gem 'devise', '~> 3.2.4'
 gem 'validates_timeliness'
 gem 'will_paginate', '~> 3.0'
 gem 'bootstrap-sass'
+gem 'paperclip', github: 'thoughtbot/paperclip'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
