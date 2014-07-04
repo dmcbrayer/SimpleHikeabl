@@ -8,6 +8,7 @@ class TripsController < ApplicationController
   end
 
   def show
+    @creator = User.find(@trip.created_by)
   end
 
   def new

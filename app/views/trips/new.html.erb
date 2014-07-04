@@ -1,5 +1,14 @@
-<h1>New trip</h1>
 
-<%= render 'form' %>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h1>New trip</h1>
+	</div>
 
-<%= link_to 'Back', trips_path %>
+	<div class="panel-body">
+		<%= render 'form' %>
+	</div>
+
+	<div class="panel-footer">
+		<%= link_to 'Back', trips_path %>
+	</div>
+</div>

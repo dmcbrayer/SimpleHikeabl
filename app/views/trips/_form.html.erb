@@ -1,25 +1,25 @@
-<%= simple_form_for(@trip) do |f| %>
-  <% if @trip.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@trip.errors.count, "error") %> prohibited this trip from being saved:</h2>
 
-      <ul>
-      <% @trip.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+
+    <%= simple_form_for(@trip) do |f| %>
+      <% if @trip.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@trip.errors.count, "error") %> prohibited this trip from being saved:</h2>
+
+          <ul>
+          <% @trip.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-
-  <%=f.input :name %>
-  <%=f.input :location %>
-  <%=f.input :starts_on %>
-  <%=f.input :ends_on %>
-  <%=f.input :description %>
-  <%=f.input :improvements %>
-  <%= f.button :submit %>
-<% end %>
-
+      <%=f.input :name %>
+      <%=f.input :location %>
+      <%=f.input :starts_on %>
+      <%=f.input :ends_on %>
+      <%=f.input :description, as: :text %>
+      <%=f.input :improvements %>
+      <%= f.button :submit %>
+    <% end %>
 
 
