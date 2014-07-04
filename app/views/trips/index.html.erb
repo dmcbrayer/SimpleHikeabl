@@ -30,8 +30,10 @@
 
     <div class="panel-footer">
       <%= link_to 'Show', trip %> |
-      <%= link_to 'Edit', edit_trip_path(trip) %> |
-      <%= link_to 'Destroy', trip, method: :delete, data: {confirm: 'Are you sure?'} %>
+      <% if current_user = trip.user %>
+        <%= link_to 'Edit', edit_trip_path(trip) %> |
+        <%= link_to 'Destroy', trip, method: :delete, data: {confirm: 'Are you sure?'} %>
+      <% end %>
     </div>
   </div>
 

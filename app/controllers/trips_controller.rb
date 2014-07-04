@@ -15,6 +15,10 @@ class TripsController < ApplicationController
   end
 
   def edit
+    @user = @trip.user
+    if current_user != @user
+      redirect_to root_url, notice: "That's not your trip to edit!"
+    end 
   end
 
   def create
