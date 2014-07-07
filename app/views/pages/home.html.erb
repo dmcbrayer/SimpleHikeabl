@@ -1,6 +1,11 @@
+<div class="jumbotron center">
+	<h1>Welcome to hikeabl!</h1>
 
-<% if user_signed_in? %>
-	<p>You are signed in as <%= current_user.name %>.  Congratulations.  You are a genius.</p>
-<% else %>
-	<p><%= link_to "Sign up", new_user_registration_path %> for Hikeabl!</p>
-<% end %>
+	<% if user_signed_in? %>
+		<h3>You are signed in as <%= current_user.name %>.  Congratulations.  You are a genius.  Mess around with the toolbar above to get started.</h3>
+	<% else %>
+		<h3><%= link_to "Sign up", new_user_registration_path %> for hikeabl.</h3>
+	<% end %>
+</div>
+
+
