@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140703153455) do
+ActiveRecord::Schema.define(version: 20140708153152) do
 
   create_table "trips", force: true do |t|
     t.integer  "user_id"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20140703153455) do
     t.integer  "created_by"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "meals"
   end
 
   add_index "trips", ["created_by"], name: "index_trips_on_created_by"
