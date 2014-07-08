@@ -17,7 +17,7 @@ class TripsController < ApplicationController
   end
 
   def edit
-    @user = @trip.user
+    @user = User.find(@trip.created_by)
     if current_user != @user
       redirect_to root_url, notice: "That's not your trip to edit!"
     end 
@@ -30,6 +30,7 @@ class TripsController < ApplicationController
 
     respond_to do |format|
       if @trip.save
+        current_user.trips << @trip
         format.html { redirect_to @trip, notice: 'Trip was successfully created.' }
         format.json { render :show, status: :created, location: @trip }
       else
@@ -67,7 +68,7 @@ class TripsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def trip_params
-      params.require(:trip).permit(:location, :description, :name, :starts_on, :ends_on, :improvements)
+      params.require(:trip).permit(:user_id, :location, :description, :name, :starts_on, :ends_on, :improvements)
     end
 
     #calculates the number of meals needed for the trip

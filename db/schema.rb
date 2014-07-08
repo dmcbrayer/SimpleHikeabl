@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140708153152) do
+ActiveRecord::Schema.define(version: 20140708193836) do
 
   create_table "trips", force: true do |t|
     t.integer  "user_id"
@@ -29,6 +29,11 @@ ActiveRecord::Schema.define(version: 20140708153152) do
 
   add_index "trips", ["created_by"], name: "index_trips_on_created_by"
   add_index "trips", ["user_id"], name: "index_trips_on_user_id"
+
+  create_table "trips_users", id: false, force: true do |t|
+    t.integer "trip_id"
+    t.integer "user_id"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
