@@ -4,7 +4,8 @@ class TripsController < ApplicationController
 
 
   def index
-    @trips = current_user.trips.all
+    @pending_trips = current_user.trips.where("starts_on >= ?", Time.now).order("starts_on ASC")
+    @past_trips = current_user.trips.where("starts_on < ?", Time.now).order("starts_on ASC")
   end
 
   def show
