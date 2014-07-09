@@ -41,7 +41,19 @@
       <%= f.text_area :improvements, class: "form-control" %>
     </div>
 
+    <h2>Users</h2>
+    <%= f.fields_for :users do |ff| %>
       <div class="form-group">
+        <%= ff.check_box :_destroy,
+              {:checked => ff.object.persisted?},
+              '0', '1'
+        %>
+        <%= ff.label :_destroy, ff.object.name %>
+        <%= ff.hidden_field :id %>
+      </div>
+    <% end %>
+
+     <div class="form-group">
       <%= f.submit class: "btn btn-primary" %>
     </div>
   <% end %>
