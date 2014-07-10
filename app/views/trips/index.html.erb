@@ -13,7 +13,7 @@
     <div class="panel panel-success drop-shadow">
       <div class="panel-heading"><h3 class="panel-title"><%= trip.location %></h3>
       <p><%= trip.starts_on.strftime("%B #{trip.starts_on.day.ordinalize}, %Y") %> - <%= trip.ends_on.strftime("%B #{trip.ends_on.day.ordinalize}, %Y") %></p>
-      <p><strong>Created By:</strong><%= trip.created_by %></p>
+      <p><strong>Created By:</strong> <%= creator_name(trip.created_by) %></p>
       <p><strong>Attendees:</strong>
         <% trip.users.each do |user| %>
           <%= link_to user.name, user %> 
