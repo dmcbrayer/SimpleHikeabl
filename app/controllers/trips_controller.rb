@@ -4,8 +4,8 @@ class TripsController < ApplicationController
 
 
   def index
-    @pending_trips = current_user.trips.where("starts_on >= ?", Time.now).order("starts_on ASC")
-    @past_trips = current_user.trips.where("starts_on < ?", Time.now).order("starts_on ASC")
+    @pending_trips = Trip.for_user(current_user).where("starts_on >= ?", Time.now).order("starts_on ASC")
+    @past_trips = Trip.for_user(current_user).where("starts_on < ?", Time.now).order("starts_on ASC")
   end
 
   def show
@@ -25,12 +25,12 @@ class TripsController < ApplicationController
 
   def create
     @trip = current_user.trips.new(trip_params)
+    #@trip.user_id = current_user.id
     @trip.created_by = current_user.id
-    calculate_meals(@trip)
+    @trip.calculate_meals
 
     respond_to do |format|
       if @trip.save
-        current_user.trips << @trip
         format.html { redirect_to @trip, notice: 'Trip was successfully created.' }
         format.json { render :show, status: :created, location: @trip }
       else
@@ -41,6 +41,9 @@ class TripsController < ApplicationController
   end
 
   def update
+
+    @trip.calculate_meals
+
     respond_to do |format|
       if @trip.update(trip_params)
         format.html { redirect_to @trip, notice: 'Trip was successfully updated.' }
@@ -53,10 +56,12 @@ class TripsController < ApplicationController
   end
 
   def destroy
-    @trip.destroy
-    respond_to do |format|
-      format.html { redirect_to trips_url, notice: 'Trip was successfully destroyed.' }
-      format.json { head :no_content }
+
+      #should do some validation here to ensure that the user is the right user
+      @trip.destroy
+      respond_to do |format|
+        format.html { redirect_to trips_url, notice: 'Trip was successfully destroyed.' }
+        format.json { head :no_content }
     end
   end
 
@@ -68,19 +73,8 @@ class TripsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def trip_params
-      params.require(:trip).permit(:location, :description, :name, :starts_on, :ends_on, :improvements, users_attributes: [:_destroy, :id])
+      params.require(:trip).permit(:location, :description, :name, :starts_on, :ends_on, :improvements, :user_ids => [])
     end
 
-    #calculates the number of meals needed for the trip
-    def calculate_meals(trip)
-      
-      t1 = trip.starts_on.to_time.to_i
-      t2 = trip.ends_on.to_time.to_i
-
-      seconds = t2-t1
-      days = seconds / 86400
-
-      trip.meals = days * 3
-
-    end
+    
 end

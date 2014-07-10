@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 
 
 
+  #has_many :created_trips
   has_and_belongs_to_many :trips
 
   before_save { self.email = email.downcase}
