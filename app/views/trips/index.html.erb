@@ -11,7 +11,7 @@
 <% if @pending_trips.any? %>
   <% @pending_trips.each do |trip| %>
     <div class="panel panel-success drop-shadow">
-      <div class="panel-heading"><h3 class="panel-title"><%= trip.location %></h3>
+      <div class="panel-heading"><h3 class="panel-title"><%= link_to trip.location, trip %></h3>
       <p><%= trip.starts_on.strftime("%B #{trip.starts_on.day.ordinalize}, %Y") %> - <%= trip.ends_on.strftime("%B #{trip.ends_on.day.ordinalize}, %Y") %></p>
       <p><strong>Created By:</strong> <%= creator_name(trip.created_by) %></p>
       <p><strong>Attendees:</strong>
@@ -61,8 +61,13 @@
 <% if @past_trips.any? %>
   <% @past_trips.each do |trip| %>
     <div class="panel panel-default drop-shadow">
-      <div class="panel-heading"><h3 class="panel-title"><%= trip.location %></h3>
+      <div class="panel-heading"><h3 class="panel-title"><%= link_to trip.location, trip %></h3>
       <p><%= trip.starts_on.strftime("%B #{trip.starts_on.day.ordinalize}, %Y") %> - <%= trip.ends_on.strftime("%B #{trip.ends_on.day.ordinalize}, %Y") %></p>
+      <p><strong>Created By:</strong> <%= creator_name(trip.created_by) %></p>
+      <p><strong>Attendees:</strong>
+        <% trip.users.each do |user| %>
+          <%= link_to user.name, user %> 
+        <% end %>
       </div>
 
       <div class="panel-body">
