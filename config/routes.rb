@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
 
 
+  get 'invitations/create'
+
+  get 'invitations/destroy'
+
+  get 'invites/create'
+
+  get 'invites/destroy'
+
   resources :trips
 
   devise_for :users

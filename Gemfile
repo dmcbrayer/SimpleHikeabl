@@ -20,8 +20,13 @@ gem 'will_paginate', '~> 3.0'
 gem 'bootstrap-sass'
 gem 'paperclip', github: 'thoughtbot/paperclip'
 
+#gem 'pry'
+
+
 group :development, :test do
 	gem 'sqlite3'
+	gem 'better_errors'
+	gem 'binding_of_caller'
 end
 
 group :production do
