@@ -7,7 +7,12 @@ class User < ActiveRecord::Base
 
 
   #has_many :created_trips
-  has_and_belongs_to_many :trips
+  #has_and_belongs_to_many :trips
+
+  has_many :trips, :foreign_key => :user_id
+
+  has_many :invitations, :foreign_key => :attendee_id
+  has_many :attended_trips, :through => :invitations
 
   before_save { self.email = email.downcase}
 

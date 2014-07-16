@@ -4,8 +4,12 @@ class TripsController < ApplicationController
 
 
   def index
-    @pending_trips = Trip.for_user(current_user).where("starts_on >= ?", Time.now).order("starts_on ASC")
-    @past_trips = Trip.for_user(current_user).where("starts_on < ?", Time.now).order("starts_on ASC")
+    @pending_trips = current_user.trips.where("starts_on >= ?", Time.now).order("starts_on ASC")
+    @past_trips = current_user.trips.where("starts_on < ?", Time.now).order("starts_on ASC")
+
+
+    #@pending_trips = Trip.for_user(current_user).where("starts_on >= ?", Time.now).order("starts_on ASC")
+    #@past_trips = Trip.for_user(current_user).where("starts_on < ?", Time.now).order("starts_on ASC")
   end
 
   def show
@@ -14,10 +18,12 @@ class TripsController < ApplicationController
 
   def new
     @trip = current_user.trips.new
+    @users = User.all
   end
 
   def edit
     @user = User.find(@trip.created_by)
+    @users = User.all
     if current_user != @user
       redirect_to root_url, notice: "That's not your trip to edit!"
     end 
@@ -73,7 +79,7 @@ class TripsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def trip_params
-      params.require(:trip).permit(:location, :description, :name, :starts_on, :ends_on, :improvements, :user_ids => [])
+      params.require(:trip).permit(:location, :description, :name, :starts_on, :ends_on, :improvements, :attendee_ids => [])
     end
 
     
