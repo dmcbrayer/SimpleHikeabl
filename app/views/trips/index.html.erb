@@ -1,3 +1,4 @@
+<% provide(:title, 'Trip Index') %>
 <div class="row">
   <div class="col-md-6">
     <h1>Listing your trips</h1>
@@ -7,101 +8,107 @@
   </div>
 </div>
 
-<p class="lead">Pending Trips</p>
-<% if @pending_trips.any? %>
-  <% @pending_trips.each do |trip| %>
-    <div class="panel panel-success drop-shadow">
-      <div class="panel-heading"><h3 class="panel-title"><%= link_to trip.location, trip %></h3>
-      <p><%= trip.starts_on.strftime("%B #{trip.starts_on.day.ordinalize}, %Y") %> - <%= trip.ends_on.strftime("%B #{trip.ends_on.day.ordinalize}, %Y") %></p>
-      <p><strong>Created By:</strong> <%= creator_name(trip.created_by) %></p>
-      <p><strong>Attendees:</strong>
-        <% trip.attendees.each do |user| %>
-          <%= link_to user.name, user %> 
-        <% end %>
-      </div>
+<div class="row">
+  <div class="col-md-6">
 
-      <div class="panel-body">
+    <p class="lead">Pending Trips</p>
+    <% if @pending_trips.any? %>
+      <% @pending_trips.each do |trip| %>
+        <div class="panel panel-success drop-shadow">
+          <div class="panel-heading"><h3 class="panel-title"><%= link_to trip.location, trip %></h3>
+          <p><%= trip.starts_on.strftime("%B #{trip.starts_on.day.ordinalize}, %Y") %> - <%= trip.ends_on.strftime("%B #{trip.ends_on.day.ordinalize}, %Y") %></p>
+          <p><strong>Created By:</strong> <%= creator_name(trip.created_by) %></p>
+          <p><strong>Attendees:</strong></p>
+            <% trip.attendees.each do |user| %>
+              <%= link_to user.name, user %>
+            <% end %>
+          </div>
 
-
-        <p>
-          <strong>Duration:</strong>
-          <%= distance_of_time_in_words(trip.starts_on, trip.ends_on) %>
-        </p>
-
-        <p>
-          <strong>Description:</strong>
-          <%= trip.description %>
-        </p>
-
-        <% if trip.improvements? %>
-          <p>
-            <strong>What do you wish you had done differently?</strong><br />
-            <%= trip.improvements %>
-          </p>
-        <% end %>
-      </div>
-
-      <div class="panel-footer">
-        <%= link_to 'Show', trip %> |
-        <% if current_user.id = trip.created_by %>
-          <%= link_to 'Edit', edit_trip_path(trip) %> |
-          <%= link_to 'Destroy', trip, method: :delete, data: {confirm: 'Are you sure?  Clicking OK will permanently delete this trip.'} %>
-        <% end %>
-      </div>
-    </div>
-
-  <% end %>
-<% else %>
-  <p>You don't have any pending trips!</p>
-<% end %>
-
-<hr class="divider"></hr>
-
-<p class="lead">Past Trips</p>
-<% if @past_trips.any? %>
-  <% @past_trips.each do |trip| %>
-    <div class="panel panel-default drop-shadow">
-      <div class="panel-heading"><h3 class="panel-title"><%= link_to trip.location, trip %></h3>
-      <p><%= trip.starts_on.strftime("%B #{trip.starts_on.day.ordinalize}, %Y") %> - <%= trip.ends_on.strftime("%B #{trip.ends_on.day.ordinalize}, %Y") %></p>
-      <p><strong>Created By:</strong> <%= creator_name(trip.created_by) %></p>
-      <p><strong>Attendees:</strong>
-        <% trip.attendees.each do |user| %>
-          <%= link_to user.name, user %> 
-        <% end %>
-      </div>
-
-      <div class="panel-body">
+          <div class="panel-body">
 
 
-        <p>
-          <strong>Duration:</strong>
-          <%= distance_of_time_in_words(trip.starts_on, trip.ends_on) %>
-        </p>
+            <p>
+              <strong>Duration:</strong>
+              <%= distance_of_time_in_words(trip.starts_on, trip.ends_on) %>
+            </p>
 
-        <p>
-          <strong>Description:</strong>
-          <%= trip.description %>
-        </p>
+            <p>
+              <strong>Description:</strong>
+              <%= trip.description %>
+            </p>
 
-        <% if trip.improvements? %>
-          <p>
-            <strong>What do you wish you had done differently?</strong><br />
-            <%= trip.improvements %>
-          </p>
-        <% end %>
-      </div>
+            <% if trip.improvements? %>
+              <p>
+                <strong>What do you wish you had done differently?</strong><br />
+                <%= trip.improvements %>
+              </p>
+            <% end %>
+          </div>
 
-      <div class="panel-footer">
-        <%= link_to 'Show', trip %> |
-        <% if current_user.id = trip.created_by %>
-          <%= link_to 'Edit', edit_trip_path(trip) %> |
-          <%= link_to 'Destroy', trip, method: :delete, data: {confirm: 'Are you sure?  Clicking OK will permanently delete this trip.'} %>
-        <% end %>
-      </div>
-    </div>
+          <div class="panel-footer">
+            <%= link_to 'Show', trip %> |
+            <% if current_user.id = trip.created_by %>
+              <%= link_to 'Edit', edit_trip_path(trip) %> |
+              <%= link_to 'Destroy', trip, method: :delete, data: {confirm: 'Are you sure?  Clicking OK will permanently delete this trip.'} %>
+            <% end %>
+          </div>
+        </div>
 
-  <% end %>
-<% else %>
-  <p>You've never been on a trip before?!</p>
-<% end %>
+      <% end %>
+    <% else %>
+      <p>You don't have any pending trips!</p>
+    <% end %>
+  </div>
+
+  <div class="col-md-6">
+
+    <p class="lead">Past Trips</p>
+    <% if @past_trips.any? %>
+      <% @past_trips.each do |trip| %>
+        <div class="panel panel-default drop-shadow">
+          <div class="panel-heading"><h3 class="panel-title"><%= link_to trip.location, trip %></h3>
+          <p><%= trip.starts_on.strftime("%B #{trip.starts_on.day.ordinalize}, %Y") %> - <%= trip.ends_on.strftime("%B #{trip.ends_on.day.ordinalize}, %Y") %></p>
+          <p><strong>Created By:</strong> <%= creator_name(trip.created_by) %></p>
+          <p><strong>Attendees:</strong></p>
+            <% trip.attendees.each do |user| %>
+              <%= link_to user.name, user %> 
+            <% end %>
+          </div>
+
+          <div class="panel-body">
+
+
+            <p>
+              <strong>Duration:</strong>
+              <%= distance_of_time_in_words(trip.starts_on, trip.ends_on) %>
+            </p>
+
+            <p>
+              <strong>Description:</strong>
+              <%= trip.description %>
+            </p>
+
+            <% if trip.improvements? %>
+              <p>
+                <strong>What do you wish you had done differently?</strong><br />
+                <%= trip.improvements %>
+              </p>
+            <% end %>
+          </div>
+
+          <div class="panel-footer">
+            <%= link_to 'Show', trip %> |
+            <% if current_user.id = trip.created_by %>
+              <%= link_to 'Edit', edit_trip_path(trip) %> |
+              <%= link_to 'Destroy', trip, method: :delete, data: {confirm: 'Are you sure?  Clicking OK will permanently delete this trip.'} %>
+            <% end %>
+          </div>
+        </div>
+
+      <% end %>
+    <% else %>
+      <p>You've never been on a trip before?!</p>
+    <% end %>
+  </div>
+</div>
 

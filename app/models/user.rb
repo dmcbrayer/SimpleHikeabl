@@ -4,9 +4,6 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-
-
-
   #This shows that a user can create many trips.  the :foreign_key statement may be redundant since I'm separately saving a creator_id in the trips controller
   has_many :trips, :foreign_key => :user_id
 
