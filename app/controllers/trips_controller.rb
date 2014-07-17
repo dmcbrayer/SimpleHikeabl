@@ -18,12 +18,12 @@ class TripsController < ApplicationController
 
   def new
     @trip = current_user.trips.new
-    @users = User.all
+    @users = User.all_except(current_user)
   end
 
   def edit
     @user = User.find(@trip.created_by)
-    @users = User.all
+    @users = User.all_except(current_user)
     if current_user != @user
       redirect_to root_url, notice: "That's not your trip to edit!"
     end 
@@ -31,7 +31,6 @@ class TripsController < ApplicationController
 
   def create
     @trip = current_user.trips.new(trip_params)
-    #@trip.user_id = current_user.id
     @trip.created_by = current_user.id
     @trip.calculate_meals
 

@@ -44,7 +44,8 @@
 
     <h2>Who went on the trip?  <small>For now, don't select yourself here.  It messes things up.</small></h2>
 
-    	<%- @users.each do |user| -%>
+    	<%= hidden_field_tag "trip[attendee_ids][]" %>
+      <%- @users.each do |user| -%>
         <div>
       		<label>
         		<%= check_box_tag "trip[attendee_ids][]", user.id, @trip.attendees.include?(user) -%>

@@ -6,6 +6,12 @@
 	<div class="panel-heading"><h3 class="panel-title">Showing the trip to <%= @trip.location %></h3>
 	<p><%= @trip.starts_on.strftime("%B #{@trip.starts_on.day.ordinalize}, %Y") %> - <%= @trip.ends_on.strftime("%B #{@trip.ends_on.day.ordinalize}, %Y") %></p>
 	<p><strong>Created by: </strong><%= @creator.name %></p>
+	<p><strong>Attendees:</strong>
+	<ul class="list-inline">
+		<% @trip.attendees.each do |attendee| %>
+			<li><%= link_to image_tag(attendee.avatar.url(:thumb), :title => "This is #{attendee.name}.", :class => "img-circle"), attendee %></li>
+		<% end %>
+	</ul>
 	</div>
 
 	<div class="panel-body">
