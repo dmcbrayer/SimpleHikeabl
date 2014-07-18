@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140716211311) do
+ActiveRecord::Schema.define(version: 20140718133840) do
 
   create_table "invitations", force: true do |t|
     t.integer  "attendee_id"
@@ -32,6 +32,8 @@ ActiveRecord::Schema.define(version: 20140716211311) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "meals"
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   add_index "trips", ["created_by"], name: "index_trips_on_created_by"

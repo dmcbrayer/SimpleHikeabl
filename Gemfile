@@ -19,6 +19,8 @@ gem 'validates_timeliness'
 gem 'will_paginate', '~> 3.0'
 gem 'bootstrap-sass'
 gem 'paperclip', github: 'thoughtbot/paperclip'
+gem 'geocoder'
+gem 'gmaps4rails'
 
 #gem 'pry'
 

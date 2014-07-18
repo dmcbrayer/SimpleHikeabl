@@ -7,7 +7,6 @@ class Trip < ActiveRecord::Base
 	has_many :invitations, :foreign_key => :attended_trip_id
 	has_many :attendees, :through => :invitations 
 
-	
 
 	validates :location, presence: true
 
@@ -26,6 +25,10 @@ class Trip < ActiveRecord::Base
 	# def for_user user
 	# 	(user.created_trips + user.trips).uniq
 	# end
+
+	#methods necessary to get latitude and longitude for the location
+	geocoded_by :location
+	after_validation :geocode
 
 	#calculates the number of meals needed for the trip
     def calculate_meals
