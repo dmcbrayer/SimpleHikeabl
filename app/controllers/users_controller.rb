@@ -7,7 +7,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    @usertrips = @user.trips.all
+    #@usertrips = @user.trips.all
+    @usertrips = Trip.for_user(@user).order("starts_on ASC")
     @hash = Gmaps4rails.build_markers(@usertrips) do |trip, marker|
       marker.lat trip.latitude
       marker.lng trip.longitude

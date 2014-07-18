@@ -14,17 +14,21 @@ class Trip < ActiveRecord::Base
 	validates_date :ends_on, :on_or_after => :starts_on, :on_or_after_message => 'must be on or after starts on date'
 	
 	#this basically ensures that we get both the trips that the user made and the trips 
-	#that the user went on, while discarding duplicates.  Given the way I've started setting this up, this may not be necessary
+	#that the user went on, while discarding duplicates.  This was originally written by John Maxwell.  Given the way I've started setting this up, I'll need to change this.
+	#scope :for_user, -> (user) {
+	#	joins("left outer join trips_users on trips.id=trips_users.trip_id").
+	#		where("trips_users.user_id = ? OR trips.created_by = ?", user.id, user.id).
+	#		uniq
+	#}
+
 	scope :for_user, -> (user) {
-		joins("left outer join trips_users on trips.id=trips_users.trip_id").
-			where("trips_users.user_id = ? OR trips.created_by = ?", user.id, user.id).
-			uniq
+		joins("left outer join invitations on trips.id=invitations.attended_trip_id").where("invitations.attendee_id= ? OR trips.user_id = ?", user.id, user.id).uniq
 	}
 
-	#The scope Lambda immediately above is apparently preferred because it is only a single database query, where the method below includes two separate queries
-	# def for_user user
-	# 	(user.created_trips + user.trips).uniq
-	# end
+	#The scope Lambda immediately above is apparently preferred because it is only a single database query, where the method below includes two separate queries.
+	#def self.for_user(user)
+	# 	(user.trips + user.attended_trips).uniq
+	#end
 
 	#methods necessary to get latitude and longitude for the location
 	geocoded_by :location

@@ -4,12 +4,13 @@ class TripsController < ApplicationController
 
 
   def index
-    @pending_trips = current_user.trips.where("starts_on >= ?", Time.now).order("starts_on ASC")
-    @past_trips = current_user.trips.where("starts_on < ?", Time.now).order("starts_on ASC")
 
+    #something is happening here that is causing the application to forget who the user is temporarily.  This apparently only happens if the user attends trips but doesn't actually own any.
 
-    #@pending_trips = Trip.for_user(current_user).where("starts_on >= ?", Time.now).order("starts_on ASC")
-    #@past_trips = Trip.for_user(current_user).where("starts_on < ?", Time.now).order("starts_on ASC")
+    @user = current_user
+
+    @pending_trips = Trip.for_user(@user).where("starts_on >= ?", Time.now).order("starts_on ASC")
+    @past_trips = Trip.for_user(@user).where("starts_on < ?", Time.now).order("starts_on ASC")
   end
 
   def show
