@@ -142,6 +142,15 @@ input {
   @extend .error;
 }
 
+/* Map Stuff */
+
+#map img { 
+  max-width: none;
+}
+#map label { 
+  width: auto; display:inline; 
+} 
+
 
 
 

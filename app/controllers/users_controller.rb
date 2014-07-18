@@ -11,6 +11,7 @@ class UsersController < ApplicationController
     @hash = Gmaps4rails.build_markers(@usertrips) do |trip, marker|
       marker.lat trip.latitude
       marker.lng trip.longitude
+      marker.infowindow trip.location
     end
   end
 
